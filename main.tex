@@ -1,16 +1,15 @@
 \documentclass[11pt,letterpaper]{article}
-\usepackage{lineno}
 
 % --- Paquetes de Idioma y Tipografía ---
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[spanish,es-nodecimaldot,english]{babel}
+\usepackage[spanish,es-nodecimaldot]{babel}
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{multicol}
-\usepackage{listings} 
-\usepackage{xcolor}
 \usepackage{float}
+\usepackage{csquotes}
+\usepackage{svg}
 
 % --- Geometría y Márgenes ---
 \usepackage{geometry}
@@ -28,50 +27,24 @@
 % --- Matemáticas y Símbolos ---
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{siunitx}
-%\usepackage{algorithm}
-\usepackage{algorithmicx}
-\usepackage{algpseudocode}
 
 % --- Gráficos y Tablas ---
 \usepackage{graphicx}
-\usepackage{fvextra}
-\usepackage{csquotes}
 \usepackage{booktabs}
-\usepackage{float}
 \usepackage{caption}
 \captionsetup{font=small,labelfont=bf,skip=4pt}
-\graphicspath{{res/},{media/},{figures/},{logos/}}
+\graphicspath{{res/},{media/},{figures/},{logos/},{figuras/}}
 
 % --- Algoritmos y Listas ---
 \usepackage{enumitem}
 \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
-\usepackage{algpseudocode}
-\usepackage{float}
-
-% --- Bloque de Código ---
-\usepackage{minted}
-\usepackage{listings}
-\usepackage{xcolor} % Para colores
-
-% Configuración opcional
-\lstset{
-    language=Python,
-    basicstyle=\ttfamily\small,
-    breaklines=true,
-    frame=single,
-    keywordstyle=\color{blue},
-    commentstyle=\color{green},
-    stringstyle=\color{red}
-}
 
 % --- Encabezados y Pies de Página ---
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\scshape Proyecto de Simulación Cinemática -- Física General}
-\fancyhead[R]{\small\scshape UMSS -- FCyT
-%\includegraphics[scale=0.04]{logos/FCYT-horizontal.png}
-}
+\fancyhead[R]{\small\scshape UMSS -- FCyT}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.0pt}
@@ -83,158 +56,152 @@
     linkcolor=black,
     citecolor=black,
     urlcolor=blue,
-    pdfauthor={Saavedra Veliz Alex Cristian},
-    pdftitle={Simulación Cinemática de Intercepción Aire-Aire Compuesta}
+    pdfauthor={Baltazar Bryan, Marquez Angel, Morales Álvaro, Saavedra Alex},
+    pdftitle={Simulación Cinemática de Intercepción Aérea Compuesta con Aceleración Escalonada y Validación Telemétrica Experimental}
 }
-\usepackage{lineno}
+
 % --- Bibliografía ---
 \usepackage[backend=biber]{biblatex}
 \addbibresource{bibliografia.bib}
 
-% --- Preambulo ---
+% --- Preámbulo de Autores ---
 \usepackage{authblk}
-\usepackage{float}
-
-\renewcommand\Authand{ \& } % Para que se muestre y en lugar de and (para 2 autores)
-\renewcommand\Authands{ \& } % Para 3 o más autores
 
 \title{\textbf{Simulación Cinemática de Intercepción Aérea Compuesta con Aceleración Escalonada y Validación Telemétrica Experimental}}
 
-%\author{Marquez Chambi Angel Eduardo 
-%    \and Baltazar Rivas Brayan
-%    \and Morales Vega Álvaro
-%    \and Saavedra Veliz Alex Cristian
-%    } % Varios autores
-
-%\author[1,2]{Baltazar Rivas Bryan\thanks{Bryan: 202601234@est.umss.edu}}
-%\author[1,2]{Marquez Chambi Angel Eduardo\thanks{201002453@est.umss.edu}}
-%\author[1,2]{Morales Vega Álvaro\thanks{202601234@est.umss.edu}}
-%\author[1,2]{Saavedra Veliz Alex Cristian\thanks{201901963@est.umss.edu}}
-
-%Variantes sin pie de página
-\author[1,2]{Baltazar Rivas Bryan
-%\texttt{202601234@est.umss.edu}
-}
-\author[1,2]{Marquez Chambi Angel Eduardo
-%\texttt{201002453@est.umss.edu}
-}
-\author[1,2]{Morales Vega Álvaro
-%\texttt{202601234@est.umss.edu}
-}
-\author[1,2]{Saavedra Veliz Alex Cristian
-%\texttt{201901963@est.umss.edu}
-}
+\author[1,2]{Baltazar Rivas Bryan}
+\author[1,2]{Marquez Chambi Angel Eduardo}
+\author[1,2]{Morales Vega Álvaro}
+\author[1,2]{Saavedra Veliz Alex Cristian}
 
 \affil[1]{Departamento de Informática y Sistemas, Universidad Mayor de San Simón}
 \affil[2]{Facultad de Ciencias y Tecnología, Universidad Mayor de San Simón}
 
-\date{} %Ocultar Fecha
+\date{}
 
-\input{marca-de-agua}
-
-% -------------------------------------------------------------
 \begin{document}
 
-% 1. Portada Institucional FCyT / UMSS
 \input{portada}
 \setcounter{page}{1}
 
-% 2. Título y Resumen Fullwidth
 \maketitle
 
 \begin{abstract}
-En el presente trabajo se formaliza el modelado cinemático, la resolución analítica vectorial y el desarrollo computacional de un sistema de intercepción aire-aire compuesto y no inercial por etapas. El escenario modela el enfrentamiento frontal a cota constante ($h = 3000\,\text{m}$) entre un caza interceptor Eurofighter Typhoon y un objetivo hostil en aproximación colineal, acoplado al disparo secuencial de un misil aire-aire guiado con fases propulsada (MRUA) y crucero (MRU). Se determinan analíticamente la distancia crítica de lanzamiento, los perfiles horarios paramétricos a trozos, el tiempo de vuelo y el punto de colisión. El modelo se implementa en Python generando en tiempo real la traza animada y la curva cinemática de Posición vs. Tiempo ($x$ vs $t$). Finalmente, los resultados en el vacío se contrastan con la telemetría del simulador de combate War Thunder, cuantificando los errores relativos derivados de la dinámica compresible y la propulsión real.\\[0.5em]
-\textbf{Keywords:} Cinemática compuesta, Intercepción aire-aire, Curva dinámica $x(t)$, Misil balístico guiado, Telemetría War Thunder.
+Este informe documenta el modelado cinemático, la deducción analítica paso a paso y la construcción computacional de un sistema de intercepción frontal aire-aire colineal a cota constante ($h = 3000\,\text{m}$) entre un caza Eurofighter Typhoon y un objetivo hostil. La trayectoria del misil guiado AIM-120C-5 se segmenta en tres regímenes cinemáticos: retardo computacional del radar (MRU), fase propulsada activa (MRUA) y fase inercial de crucero (MRU). Se determinan las ecuaciones horarias paramétricas a trozos, la distancia crítica de disparo, el tiempo de vuelo y las coordenadas cartesianas de colisión en un marco fijo en tierra. El modelo matemático se implementa en un motor gráfico interactivo en Python (Pygame) a 60 FPS con telemetría en tiempo real. Finalmente, los resultados numéricos se contrastan con los datos del visor balístico de \textit{War Thunder}, cuantificando las desviaciones porcentuales relativas ocasionadas por la resistencia aerodinámica y la pérdida de masa por combustión.
+\\[0.5em]
+\textbf{Palabras Clave:} Cinemática lineal compuesta, Intercepción aire-aire, Curva dinámica $x(t)$, Validación telemétrica, Pygame.
 \end{abstract}
 
 \begin{multicols}{2}
 
 \section{Introducción}
 
-El análisis de trayectorias cinemáticas compuestas con múltiples marcos móviles representa uno de los desafíos clave en la cinemática de partículas y la navegación guiada~\cite{hibbeler}. A diferencia de los problemas de proyectiles balísticos pasivos con aceleración gravitacional constante~\cite{sears}, los vectores de intercepción aire-aire operan mediante regímenes de aceleración por etapas: retardo del sistema de control de fuego (FCS), fase activa de combustión de propelente sólido y fase inercial terminal. En este proyecto se formaliza la solución matemática exacta de este sistema acoplado y su transposición a una simulación de código en Python, evaluando su convergencia teórica frente a la telemetría experimental.
+El estudio de la cinemática de partículas permite predecir la posición y velocidad de múltiples cuerpos en movimiento sin requerir el cómputo de las fuerzas causantes~\cite{hibbeler}. Para los estudiantes de Ingeniería Informática, la cinemática clásica constituye la base para construir motores de simulación, físicas en videojuegos y sistemas de navegación autónoma~\cite{sears}. En aplicaciones aeroespaciales reales, el movimiento de un proyectil no obedece a una sola aceleración uniforme, sino a regímenes escalonados: latencia de cálculo del radar, combustión de propelente sólido y vuelo inercial. Este trabajo formaliza dicha transición mecánica y su transposición algorítmica.
 
 \section{Objetivos}
 
 \subsection{Objetivo General}
-Diseñar e implementar un motor de simulación cinemática interactivo en Python para el modelado de un escenario de intercepción aérea bimóvil con misil bietápico, contrastando las deducciones analíticas exactas frente al cómputo numérico y a datos empíricos de telemetría aeronáutica.
+Modelar, calcular analíticamente e implementar un motor de simulación cinemática interactivo en Python para una intercepción aérea bietápica, validando las deducciones matemáticas contra la telemetría experimental de \textit{War Thunder}.
 
 \subsection{Objetivos Específicos}
 \begin{itemize}[leftmargin=1.2em]
-    \item Deducir analíticamente las funciones de posición vectoriales $\vec{r}_i(t)$ a trozos para el caza interceptor (Avión A), el objetivo (Avión B) y el misil guiado AIM-120.
-    \item Calcular las variables operativas críticas: separación al disparo ($d_s$), velocidad máxima de crucero ($v_{\text{máx}}$), tiempo total operativo ($t_{\text{total}}$) y coordenadas cartesianas de colisión.
-    \item Construir la arquitectura de simulación en Python con interfaz interactiva, incorporando la visualización dinámica y continua de la curva $x(t)$.
-    \item Contrastar los resultados numéricos con registros de telemetría de \textit{War Thunder}, determinando el error porcentual relativo inducido por el modelo aerodinámico real.
+    \item Formular de manera rigurosa las funciones horarias de posición $x(t)$ y velocidad $v(t)$ para el caza portador (Avión A), el objetivo (Avión B) y el proyectil interceptor.
+    \item Calcular las magnitudes críticas: separación al disparo ($d_s$), velocidad máxima ($v_{\text{máx}}$), tiempo total de vuelo ($t_{\text{vuelo}}$) y coordenada global de impacto ($x_{\text{imp}}$).
+    \item Implementar la arquitectura de software en Python mediante un bucle de renderizado 2D y gráficas paramétricas dinámicas a 60 FPS.
+    \item Contrastar los resultados numéricos con los datos empíricos de \textit{War Thunder}, determinando el error porcentual relativo inducido por la resistencia del aire.
 \end{itemize}
 
 \section{Fundamento Teórico y Deducción Analítica}
 
-\subsection{Definición del Sistema de Referencia}
-Se establece un marco inercial cartesiano global fijo en tierra $Oxy$:
+\subsection{Conceptos Fundamentales de Movimiento}
+Para describir el movimiento, una partícula modifica su posición $x$ en el tiempo $t$:
 \begin{itemize}[leftmargin=1.2em]
-    \item \textbf{Origen $(0,0)$}: Proyección sobre el terreno de la posición del Avión B en el instante de detección radar ($t = 0\,\text{s}$).
-    \item \textbf{Eje $+X$}: Dirección colineal al vector de avance del Avión B.
-    \item \textbf{Eje $+Y$}: Dirección vertical perpendicular al suelo.
+    \item \textbf{Movimiento Rectilíneo Uniforme (MRU):} La velocidad es constante ($a = 0$):
+    \begin{equation}
+        v = \frac{dx}{dt} \implies x(t) = x_0 + v \cdot t \label{eq:mru_base}
+    \end{equation}
+    \item \textbf{Movimiento Rectilíneo Uniformemente Acelerado (MRUA):} La aceleración es constante ($a = \text{cte}$):
+    \begin{align}
+        v(t) &= v_0 + a \cdot t \label{eq:mrua_v}\\
+        x(t) &= x_0 + v_0 \cdot t + \frac{1}{2}a \cdot t^2 \label{eq:mrua_x}
+    \end{align}
 \end{itemize}
 
-Las velocidades de crucero se normalizan mediante análisis dimensional unitario ($v\,[\text{m/s}] = v\,[\text{km/h}]/3.6$):
+\subsection{Sistema de Coordenadas Inercials}
+$$Oxy$$
+Se fija un marco inercial fijo en tierra:
+\begin{itemize}[leftmargin=1.2em]
+    \item \textbf{Origen $(0,0)$:} Proyección en tierra de la posición inicial del Caza A en $t = 0\,\text{s}$.
+    \item \textbf{Eje $+X$:} Sentido horizontal hacia la derecha (dirección de avance del Caza A y del proyectil).
+    \item \textbf{Eje $+Y$:} Dirección vertical perpendicular al suelo ($h = 3000\,\text{m}$).
+\end{itemize}
+
+Conversión de velocidad al Sistema Internacional:
 \begin{align}
-    v_A &= \frac{900}{3.6}\,\text{m/s} = 250.00\,\text{m/s} \\
-    v_B &= \frac{360}{3.6}\,\text{m/s} = 100.00\,\text{m/s}
+    v_A &= \frac{900\,\text{km/h}}{3.6} = 250.00\,\text{m/s} \label{eq:conv_va}\\
+    v_B &= \frac{360\,\text{km/h}}{3.6} = 100.00\,\text{m/s} \label{eq:conv_vb}
 \end{align}
 
-Condiciones iniciales vectoriales en $t=0\,\text{s}$ a altitud $h = 3000\,\text{m}$:
+Condiciones iniciales vectoriales en $t=0\,\text{s}$:
 \begin{align*}
-    \vec{r}_B(0) &= 0\,\hat{i} + 3000\,\hat{j}\quad [\text{m}],\\ 
-    \quad \vec{v}_B &= +100\,\hat{i}\quad [\text{m/s}] \\
-    \vec{r}_A(0) &= 9750\,\hat{i} + 3000\,\hat{j}\quad [\text{m}], \\
-    \quad \vec{v}_A &= -250\,\hat{i}\quad [\text{m/s}]
+    \vec{r}_A(0) &= 0\,\hat{i} + 3000\,\hat{j}\;[\text{m}], \quad \vec{v}_A = +250.00\,\hat{i}\;[\text{m/s}] \\
+    \vec{r}_B(0) &= 9750\,\hat{i} + 3000\,\hat{j}\;[\text{m}], \quad \vec{v}_B = -100.00\,\hat{i}\;[\text{m/s}]
 \end{align*}
 
-\subsection{Cinemática del Retardo FCS}
+\subsection{Fase 1: Retardo del Radar FCS}
 $$t \in [0, t_s]$$
-Durante el procesamiento de señal ($t_s = 5.0\,\text{s}$), ambos móviles ejecutan MRU:
+
+Durante $t_s = 5.0\,\text{s}$, el radar procesa la solución de tiro. Aplicando la ecuación~\eqref{eq:mru_base}, ambos aviones se desplazan en MRU:
 \begin{align}
-    x_B(t_s) &= 0 + v_B \cdot t_s = 100 \cdot 5.0 = 500.00\,\text{m} \label{eq:pos_xb_ts}\\
-    x_A(t_s) &= D_0 - v_A \cdot t_s = 9750 - 250(5.0) = 8500.00\,\text{m} \label{eq:pos_xa_ts}
+    x_A(t_s) &= 0 + (250.00)(5.0) = 1250.00\,\text{m} \label{eq:pos_xa_ts}\\
+    x_B(t_s) &= 9750.00 - (100.00)(5.0) = 9250.00\,\text{m} \label{eq:pos_xb_ts}
 \end{align}
-La separación crítica de lanzamiento resulta:
+La distancia de separación al instante del disparo es:
 \begin{equation}
-    d_s = x_A(t_s) - x_B(t_s) = 8500.00 - 500.00 = 8000.00\,\text{m} \label{eq:ds}
+    d_s = x_B(t_s) - x_A(t_s) = 9250.00 - 1250.00 = 8000.00\,\text{m} \label{eq:ds}
 \end{equation}
 
-\subsection{Fase Propulsada del Misil}
-$$t \in[t_s, t_s + t_p]$$
-Durante $t_p = 5.0\,\text{s}$, el motor cohete entrega una aceleración horizontal constante $a_m = 120.0\,\text{m/s}^2$ en sentido $-\hat{i}$:
+\subsection{Fase 2: Propulsión Activa del Misil}
+
+$$t \in [t_s, t_s + t_p]$$
+Durante $t_p = 5.0\,\text{s}$, el motor cohete entrega una aceleración constante $a_m = 120.0\,\text{m/s}^2$ en sentido $+\hat{i}$. El proyectil hereda la velocidad de la aeronave portadora ($v_A$):
 \begin{equation}
-    a_x(t) = \frac{dv_x}{dt} = -a_m
+    v_m(t) = v_A + a_m(t - t_s) \label{eq:vel_misil_prop}
 \end{equation}
-Integrando con condición inicial $v_m(t_s) = -v_A$:
+Al quemarse todo el propelente ($t = 10.0\,\text{s}$), se alcanza la velocidad máxima mediante~\eqref{eq:mrua_v}:
 \begin{equation}
-    v_m(t) = -v_A - a_m(t - t_s) \label{eq:vel_misil_prop}
+    v_{\text{máx}} = 250.00 + (120.00)(5.0) = 850.00\,\text{m/s} \label{eq:vmax}
 \end{equation}
-La rapidez máxima alcanzada al agotamiento del propelente ($t = 10.0\,\text{s}$) es:
-\begin{equation}
-    v_{\text{máx}} = v_A + a_m \cdot t_p = 250 + (120)(5.0) = 850.00\,\text{m/s} \label{eq:vmax}
-\end{equation}
-Integrando la velocidad horizontal, se obtiene la ecuación horaria de posición:
-\begin{equation}
-    x_m(t) = x_A(t_s) - v_A(t - t_s) - \frac{1}{2}a_m(t - t_s)^2 \label{eq:xm_prop}
-\end{equation}
-Al final de la propulsión ($t = 10.0\,\text{s}$), el avance del misil y su coordenada son:
+
+La distancia recorrida por el misil durante la propulsión corresponde a~\eqref{eq:mrua_x}:
 \begin{align}
-    \Delta x_{m,p} &= v_A t_p + \frac{1}{2}a_m t_p^2 = 2750.00\,\text{m} \\
-    x_m(10.0) &= 8500 - 2750 = 5750.00\,\text{m}
+    \Delta x_{m,p} &= v_A t_p + \frac{1}{2}a_m t_p^2 \nonumber \\
+    &= (250)(5) + \frac{1}{2}(120)(25) = 2750.00\,\text{m} \label{eq:dx_prop}
+\end{align}
+La coordenada global del misil en $t = 10.0\,\text{s}$ resulta:
+
+\begin{align}
+    x_m(10.0) &= x_A(t_s) + \Delta x_{m,p} \\
+    x_m(10.0) &= 1250.00 + 2750.00 = 4000.00\,\text{m}
 \end{align}
 
-\subsection{Fase de Crucero y Condición de Impacto}
-En $t = 10.0\,\text{s}$, el Avión B se sitúa en $x_B(10.0) = 1000.00\,\text{m}$. La distancia relativa remanente $D_{\text{rem}}$ es:
-\begin{align}
-    D_{\text{rem}} &= x_m(10.0) - x_B(10.0)\\ 
-    &= 5750 - 1000\\ 
-    &= 4750.00 \text{m}
-\end{align}
+\subsection{Fase 3: Crucero y Condición de Impacto}
+En $t = 10.0\,\text{s}$, la posición del Avión B es:
+\begin{equation}
+    x_B(10.0) = 9750.00 - (100.00)(10.0) = 8750.00\,\text{m}
+\end{equation}
+La distancia remanente ($D_{\text{rem}}$) entre el misil y el objetivo es:
 
-Con una rapidez relativa de cierre frontal $v_{\text{rel}} = v_{\text{máx}} + v_B = 950.00\text{m/s}$, el tiempo remanente en crucero ($t_c$) resulta:
+\begin{align*}
+    D_{\text{rem}} &= x_B(10.0) - x_m(10.0) \\
+    D_{\text{rem}} &= 8750.00 - 4000.00 = 4750.00\,\text{m}
+\end{align*}
+
+Al desplazarse en sentidos opuestos, la rapidez relativa de cierre frontal es:
+\begin{equation}
+    v_{\text{rel}} = v_{\text{máx}} + v_B = 850.00 + 100.00 = 950.00\,\text{m/s}
+\end{equation}
+El tiempo remanente en crucero inercial ($t_c$) hasta la colisión es:
 \begin{equation}
     t_c = \frac{D_{\text{rem}}}{v_{\text{rel}}} = \frac{4750.00\,\text{m}}{950.00\,\text{m/s}} = 5.00\,\text{s} \label{eq:tc}
 \end{equation}
@@ -245,163 +212,162 @@ Tiempos acumulados del operativo:
     t_{\text{total}} &= t_s + t_{\text{vuelo}} = 5.00 + 10.00 = 15.00\,\text{s} \label{eq:ttotal}
 \end{align}
 
-Coordenadas de impacto en el plano Oxy:
-\begin{equation}
-    x_{\text{imp}} = v_B \cdot t_{\text{total}} = (100.00\,\text{m/s})(15.00\,\text{s}) = 1500.00\,\text{m}
-\end{equation}
-Punto de impacto exacto: $(1500.00\text{ m}, 3000.00\text{ m})$. El recorrido total del misil desde su liberación es:
+Punto cartesiano de impacto global en tierra:
 \begin{align}
-  \Delta x_{m,\text{total}} &= \Delta x_{m,p} + v_{\text{máx}} \cdot t_c \\
-  &= 2750 + (850)(5.00)\\ 
-  &= 7000.00 \text{ m}    
+    x_{\text{imp}} &= x_B(0) - v_B \cdot t_{\text{total}} \nonumber \\
+    &= 9750 - (100)(15.0) = 8250.00\,\text{m} \label{eq:ximp}
+\end{align}
+Coordenadas espaciales: $(8250.00\,\text{m}, 3000.00\,\text{m})$.
+
+Recorrido horizontal total del misil desde su liberación:
+\begin{align}
+    \Delta x_{m,\text{total}} &= \Delta x_{m,p} + v_{\text{máx}} \cdot t_c \nonumber \\
+    &= 2750 + (850)(5) = 7000.00\,\text{m} \label{eq:dx_total}
 \end{align}
 
 \section{Materiales y Entorno Computacional}
 
-Lenguaje, librerías y entorno de simulación elegidos:
 \begin{itemize}[leftmargin=1.2em]
-    \item \textbf{Python 3.11+}: Núcleo algorítmico y control de flujo.
-    \item \textbf{PyCharm}: Entorno de desarrollo integrado (IDE) para la edición de código.
-    \item \textbf{Pygame}: Renderizado gráfico 2D en tiempo real, gestión del bucle de simulación (\textit{game loop}) e interfaz táctica interactiva. 
-    \item \textbf{Librerías estándar (\texttt{math}, \texttt{sys}, \texttt{random})}: Funciones matemáticas y trigonométricas (\texttt{math}), gestión de eventos y terminación del sistema (\texttt{sys}), y generación de parámetros aleatorios (\texttt{random}).
-    \item \textbf{War Thunder Ordnance \& Trajectory Visualizer}: Entorno balístico experimental con telemetría en tiempo real para la comparación de resultados.
+    \item \textbf{Python 3.11:} Lenguaje utilizado para el cómputo analítico, la integración cinemática y la gestión de datos.
+    \item \textbf{Pygame 2.5:} Biblioteca para el bucle de renderizado interactivo (\textit{game loop}) a 60 FPS, control de eventos en tiempo real y dibujo de siluetas vectoriales.
+    \item \textbf{PyCharm IDE:} Entorno de desarrollo para la estructuración y depuración modular del código fuente.
+    \item \textbf{Visor Telemétrico de War Thunder:} Simulador aerodinámico con modelado de atmósfera ISA utilizado para la toma empírica de datos balísticos.
+    \item \textbf{Google Gemini (Modelo LLM):} Empleado como herramienta asistiva para la optimización de expresiones paramétricas, estructuración de la interfaz MFD en Pygame y maquetación técnica en \LaTeX.
 \end{itemize}
 
-\section{Metodología y Algoritmo de Simulación}
+\section{Procedimiento y Lógica de Implementación}
 
-La lógica cinemática del script interactivo se estructura según los siguientes Algoritmos \ref{alg:sim_avion}.
+El procedimiento metodológico articula la conversión del modelo matemático analítico en un motor computacional dinámico mediante un bucle de simulación paso a paso (Algoritmo~\ref{alg:procedimiento_general}). El flujo general parte de la carga y conversión de parámetros, entra al bucle de integración temporal donde actualiza las variables de estado según la fase activa (\textit{Bodega}, \textit{Propulsión} o \textit{Crucero}), registra el historial de telemetría y renderiza las vistas tácticas hasta verificar la condición de impacto ($t \ge t_{\text{total}}$).
 
-\begin{algorithm}[H]
-\SetAlgoLined
-\DontPrintSemicolon
-\tcp{Parámetros de entrada configurables} Leer $D_{inicial}$\; Leer $v_A$, $v_B$\; Convertir velocidades de km/h a m/s\; Leer $t_s$, $t_p$, $a_m$\; \tcp{Cálculos cinemáticos} $v_{max\_misil} \leftarrow v_A + a_m \cdot t_p$\; $d_{prop} \leftarrow v_A \cdot t_p + \frac{1}{2}a_m t_p^2$\; $d_s \leftarrow D_{inicial} - (v_A + v_B)\cdot t_s$\; \tcp{Cálculo de tiempos} $gap_{fin\_prop} \leftarrow d_s - v_B\cdot t_p - d_{prop}$\; $t_c \leftarrow \frac{gap_{fin\_prop}} {v_{max\_misil}+v_B}$\; $t_{vuelo} \leftarrow t_p + t_c$\; $t_{total} \leftarrow t_s + t_{vuelo}$\; $x_{impacto} \leftarrow D_{inicial} - v_B\cdot t_{total}$\;
-\caption{Parámetros de entrada configurables y cálculos base }
-\label{alg:sim_avion}
-\end{algorithm}
-
-\begin{algorithm}[H]
-\SetAlgoLined
-\DontPrintSemicolon
-\tcp{Datos de referencia de War Thunder} Leer $t_{vuelo}^{WT}$\; Leer $v_{max}^{WT}$\; Leer $d_{misil}^{WT}$\; \tcp{Cálculo de errores relativos} $err_{vuelo} \leftarrow \left(\frac{t_{vuelo}^{WT}-t_{vuelo}} {t_{vuelo}}\right)\times100$\; $err_{vmax} \leftarrow \left(\frac{v_{max}^{WT}-v_{max\_misil}} {v_{max\_misil}}\right)\times100$\; $err_{dist} \leftarrow \left(\frac{d_{misil}^{WT}-d_{misil}} {d_{misil}}\right)\times100$\; Retornar $err_{vuelo}$, $err_{vmax}$ y $err_{dist}$\;
-\caption{Validación telemétrica  }
-\label{alg:sim_avion2}
-\end{algorithm}
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.73\linewidth]{figuras/War Thunder Telemetry Simulation Flow-.png}
+    \caption{Flujo general de ejecución y arquitectura del motor de simulación.}
+    \label{fig:diagrama_flujo}
+\end{figure}
 
 \begin{algorithm}[H]
 \SetAlgoLined
 \DontPrintSemicolon
-\tcp{Movimiento de las aeronaves} $x_A \leftarrow v_A \cdot t$\; $x_B \leftarrow D_{inicial} - v_B \cdot t$\; \tcp{Evaluación de fase del misil} \eIf{$t < t_s$} { Fase $\leftarrow$ BODEGA\; $x_m \leftarrow x_A$\; $v_m \leftarrow v_A$\; } { \eIf{$t \leq t_s+t_p$} { Fase $\leftarrow$ PROPULSIÓN\; $\tau \leftarrow t-t_s$\; $x_m \leftarrow v_A t_s + v_A \tau + \frac{1}{2}a_m\tau^2$\; $v_m \leftarrow v_A+a_m\tau$\; } { Fase $\leftarrow$ CRUCERO\; $\tau_c \leftarrow t-t_s-t_p$\; $x_{fin} \leftarrow v_A t_s + v_A t_p + \frac{1}{2}a_m t_p^2$\; $x_m \leftarrow x_{fin}+v_{max\_misil}\tau_c$\; $v_m \leftarrow v_{max\_misil}$\; } } Guardar $(t,x_m,\text{fase})$ en el historial\;
-\caption{Estado dinámico}
-\label{alg:sim_avion3}
+\tcp{1. Inicialización y Entrada}
+Cargar parámetros: $D_0, v_A, v_B, t_s, t_p, a_m$\;
+Convertir velocidades de km/h a m/s\;
+Calcular soluciones analíticas exactas ($v_{\text{máx}}, t_{\text{total}}, x_{\text{imp}}$)\;
+\tcp{2. Bucle Principal (Tick $\Delta t = 1/60\,\text{s}$)}
+\While{no colisión y simulación activa}{
+    Capturar eventos de teclado/mouse\;
+    $t \leftarrow t + \Delta t$\;
+    $x_A(t) \leftarrow v_A \cdot t$\;
+    $x_B(t) \leftarrow D_0 - v_B \cdot t$\;
+    \eIf{$t < t_s$}{
+        Fase $\leftarrow$ BODEGA\;
+        $x_m(t) \leftarrow x_A(t)$;\;
+    }{
+        \eIf{$t \le t_s + t_p$}{
+            Fase $\leftarrow$ PROPULSIÓN\;
+            $\tau \leftarrow t - t_s$\;
+            $x_m(t) \leftarrow x_A(t_s) + v_A \tau + \frac{1}{2}a_m \tau^2$\;
+        }{
+            Fase $\leftarrow$ CRUCERO\;
+            $\tau_c \leftarrow t - t_s - t_p$\;
+            $x_m(t) \leftarrow x_m(t_s+t_p) + v_{\text{máx}}\tau_c$\;
+        }
+    }
+    Registrar telemetría en matrices de historial\;
+    Mapear coordenadas métricas a píxeles de pantalla\;
+    Renderizar siluetas 2D y curvas dinámicas\;
+    \If{$t \ge t_{\text{total}}$}{
+        Detonar evento de impacto y congelar trazas\;
+    }
+}
+\tcp{3. Validación Telemétrica}
+Calcular error relativo: $e = \frac{X_{\text{WT}} - X_{\text{Teórico}}}{X_{\text{Teórico}}} \times 100$\;
+Mostrar reporte MFD unificado\;
+\caption{Procedimiento del motor de simulación cinemática.}
+\label{alg:procedimiento_general}
 \end{algorithm}
 
+\textit{El código fuente del motor gráfico interactivo (\texttt{Simulacion2.py}), los archivos del informe en \LaTeX, las diapositivas de defensa y los registros telemétricos se encuentran alojados en el repositorio público de GitHub:}
 
-\begin{algorithm}[H]
-\SetAlgoLined
-\DontPrintSemicolon
-\tcp{Conversión de coordenadas} Convertir $x_A$ a píxeles\; Convertir $x_B$ a píxeles\; Convertir $x_m$ a píxeles\; Convertir altitud $y_m$ a píxeles\; \tcp{Dibujado de entidades} Dibujar aeronave interceptora\; Dibujar aeronave objetivo\; Dibujar misil con su orientación instantánea\; \tcp{Información táctica} $D_{rel} \leftarrow |x_B-x_m|$\; Mostrar distancia relativa en pantalla\;
-\caption{Vista táctica (gráfica) }
-\label{alg:sim_avion4}
-\end{algorithm}
-\begin{algorithm}[H]
-\SetAlgoLined
-\DontPrintSemicolon
-\tcp{Normalización de trayectorias} Obtener trayectoria histórica del Avión A\; Obtener trayectoria histórica del Avión B\; Representar ambas curvas en el plano $x(t)$\; \tcp{Trayectoria del misil} Separar registros de fase PROPULSIÓN\; Separar registros de fase CRUCERO\; Graficar segmento de propulsión\; Graficar segmento de crucero\;
-\caption{Curva dinámica (gráfica)  }
-\label{alg:sim_avion5}
-\end{algorithm}
-
-
-\begin{algorithm}[H]
-\SetAlgoLined
-\DontPrintSemicolon
-Obtener conjunto de puntos $(x,y)$ del misil\; Dibujar línea de referencia de altitud\; Dibujar curva de trayectoria Loft\; \tcp{Punto de lanzamiento} Calcular coordenada de separación del misil\; Marcar punto de suelta sobre la trayectoria\;
-\caption{Trayectoria de vuelo (gráfica)   }
-\label{alg:sim_avion6}
-\end{algorithm}
-
-
-\begin{algorithm}[H]
-\SetAlgoLined
-\DontPrintSemicolon
-\tcp{Velocidad del misil} Obtener historial de velocidades\; Normalizar datos\; Graficar curva $V_m(t)$\; \tcp{Distancia relativa} Obtener historial de distancias relativas\; Normalizar datos\; Graficar curva $D_{rel}(t)$\; \tcp{Lecturas instantáneas} Obtener valor actual de velocidad\; Obtener valor actual de distancia relativa\; Mostrar ambos valores en pantalla\;
-\caption{Perfil Vm (gráfica)   }
-\label{alg:sim_avion7}
-\end{algorithm}
-
-
-\end{multicols}
-
-\newpage
+\begin{center}
+    \url{https://github.com/A-Saavedra/simulacion-cinematica}
+\end{center}
 
 \section{Análisis de Resultados y Validación Telemétrica}
 
-En la Tabla \ref{tab:comparativa} se contrastan los valores analíticos deducidos en el vacío, los obtenidos por el script en Python y los registrados por telemetría balística en \textit{War Thunder}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.98\linewidth]{figuras/Vista_tactica.png}
+    \caption{Vista Táctica 2D: Intercepción en aproximación frontal a cota $3000\,\text{m}$.}
+    \label{fig:vista_tactica}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.98\linewidth]{figuras/Curva_Dinamica_XvsT.png}
+    \caption{Curva Dinámica $x(t)$: Traza horaria de los móviles y punto de colisión.}
+    \label{fig:curva_x_vs_t}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.98\linewidth]{figuras/Trayectoria_vuelo.png}
+    \caption{Trayectoria balística con perfil de sustentación \textit{Loft}.}
+    \label{fig:perfil_loft}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.98\linewidth]{figuras/Perfil_vm.png}
+    \caption{Perfil de velocidad instantánea $v_m(t)$ y cierre de distancia $D_{\text{rel}}(t)$.}
+    \label{fig:perfil_vm}
+\end{figure}
+
+\end{multicols}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figuras/Telemetria.png}
+    \caption{Macro-Gráfica Unificada: Fusión multivariable y resumen final de telemetría.}
+    \label{fig:telemetria_unificada}
+\end{figure}
+
+En la Tabla~\ref{tab:comparativa} se contrastan los valores analíticos deducidos en el vacío, los obtenidos por el script en Python y los registrados por el visor telemétrico balístico de \textit{War Thunder}.
 
 \begin{table}[H]
     \centering
     \caption{Contraste cinemático: Teórico vs. Python vs. War Thunder.}
     \label{tab:comparativa}
-    \resizebox{\linewidth}{!}{%
     \begin{tabular}{lcccc}
         \toprule
-        \textbf{Variable} & \textbf{Teórico} & \textbf{Python} & \textbf{War Thunder} & \textbf{Error Rel.} \\
+        \textbf{Variable Evaluada} & \textbf{Teórico ($Oxy$)} & \textbf{Python} & \textbf{War Thunder} & \textbf{Error Relativo (\%)} \\
         \midrule
-        $t_{\text{vuelo}}$ [s] & $10.00$ & $10.00$ & $10.19$ & $+1.90\%$ \\
-        $v_{\text{máx}}$ [m/s] & $850.00$ & $850.00$ & $890.00$ & $+4.71\%$ \\
-        $\Delta x_{\text{misil}}$ [m] & $7000.00$ & $7000.00$ & $7011.00$ & $+0.16\%$ \\
-        $x_{\text{imp}}$ [m] & $1500.00$ & $1500.00$ & $1514.00$ & $+0.93\%$ \\
-        $x_A(t_{\text{imp}})$ [m] & $6000.00$ & $6000.00$ & $5995.00$ & $-0.08\%$ \\
+        Tiempo de Vuelo Misil ($t_{\text{vuelo}}$) [s] & $10.00$ & $10.00$ & $10.19$ & $+1.90\%$ \\
+        Velocidad Máxima Misil ($v_{\text{máx}}$) [m/s] & $850.00$ & $850.00$ & $890.00$ & $+4.71\%$ \\
+        Recorrido Misil ($\Delta x_{m,\text{total}}$) [m] & $7000.00$ & $7000.00$ & $7011.00$ & $+0.16\%$ \\
+        Punto de Impacto Global ($x_{\text{imp}}$) [m] & $8250.00$ & $8250.00$ & $8236.00$ & $-0.17\%$ \\
+        Posición Caza A al Impacto ($x_A$) [m] & $3750.00$ & $3750.00$ & $3745.00$ & $-0.13\%$ \\
         \bottomrule
     \end{tabular}
-    }
 \end{table}
 
 \begin{multicols}{2}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{figuras/Vista_tactica.png}
-    \caption{Vista Tactica 2D}
-    \label{fig:intercepcion_dinamica}
-\end{figure}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{figuras/Curva_Dinamica_XvsT.png}
-    \caption{Curva Dinamica X vs T (Vista WT)}
-    \label{fig:intercepcion_dinamica2}
-\end{figure}
+\subsection{Interpretación Física de las Desviaciones}
+La discrepancia entre la deducción matemática analítica y la simulación computacional en Python es de $0.00\%$ (Tabla~\ref{tab:comparativa}), comprobando que el algoritmo numérico implementa con precisión las ecuaciones horarias continuas sin introducir derivas numéricas.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{figuras/Trayectoria_vuelo.png}
-    \caption{Trayectoria de vuelo (Perfil Loft War Thunder)}
-    \label{fig:intercepcion_dinamica3}
-\end{figure}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{figuras/Perfil_vm.png}
-    \caption{Perfil Vm(t) y Distancia D}
-    \label{fig:intercepcion_dinamica4}
-\end{figure}
-
-\end{multicols}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{figuras/Telemetria.png}
-    \caption{Fusion multivariable y Telemetria total}
-    \label{fig:intercepcion_dinamica5}
-\end{figure}
-
-\begin{multicols}{2}
-
-La consistencia entre la deducción matemática y la simulación en Python es absoluta ($0.00\%$ de discrepancia). Al contrastar el modelo teórico en el vacío contra la captura de telemetría de \textit{War Thunder} (Figura telemétrica), se registra un tiempo de vuelo experimental de $10.19\,\text{s}$ y una distancia total de $7011\,\text{m}$. La discrepancia es menor al $2\%$, explicada físicamente por la curva de empuje no lineal del propulsor sólido y el coeficiente de resistencia aerodinámica parásita ($C_D$) modelado por el motor del juego.
+Como se observa en la traza horaria de la Figura~\ref{fig:curva_x_vs_t} y en los perfiles cinemáticos de las Figuras~\ref{fig:perfil_loft} y~\ref{fig:perfil_vm}, la intercepción se completa exactamente en $t = 15.00\,\text{s}$. Al contrastar el modelo con la telemetría experimental de \textit{War Thunder} (Figura~\ref{fig:telemetria_unificada}), los errores relativos se mantienen por debajo del $5\%$:
+\begin{itemize}[leftmargin=1.2em]
+    \item \textbf{Tiempo de vuelo ($+1.90\%$):} En el simulador comercial, el tiempo asciende a $10.19\,\text{s}$ debido al arrastre aerodinámico ($D = \frac{1}{2}\rho v^2 S C_D$), que frena gradualmente al misil durante su fase inercial de crucero.
+    \item \textbf{Velocidad máxima ($+4.71\%$):} En el simulador, al consumirse el combustible sólido la masa se reduce ($m(t) < m_0$). Por la segunda ley de Newton ($a = F/m$), la aceleración real aumenta hacia el término de la combustión, alcanzando $890.00\,\text{m/s}$ frente a los $850.00\,\text{m/s}$ del modelo de aceleración constante.
+    \item \textbf{Distancia y punto de impacto ($-0.17\%$):} La colisión se ubica en $8236.00\,\text{m}$ frente a los $8250.00\,\text{m}$ analíticos, demostrando una concordancia cinemática superior al $99.8\%$.
+\end{itemize}
 
 \section{Conclusiones}
 
-Se formalizó y resolvió el problema cinemático bimóvil bietápico correspondiente al enfrentamiento Eurofighter Typhoon vs. blanco hostil. La arquitectura en Python verificó la validez de las soluciones analíticas horarias sin truncamientos numéricos. La incorporación de telemetría experimental demostró la aplicabilidad del modelo de cinemática clásica como cota asintótica de alta precisión frente a motores físicos complejos.
+Se modeló e implementó exitosamente el problema cinemático de persecución frontal compuesta. La formalización por etapas permitió desacoplar los tramos de aceleración nula y aceleración constante de forma rigurosa. La implementación computacional en Python mediante Pygame validó las expresiones matemáticas con fidelidad exacta respecto al análisis formal. Finalmente, el contraste experimental con \textit{War Thunder} probó que la cinemática clásica ideal representa una cota asintótica de alta precisión para aproximar trayectorias balísticas en medios atmosféricos.
 
 \section{Referencias}
 
