@@ -7,7 +7,7 @@ Este repositorio contiene el código fuente, la deducción analítica formal, la
 ## Estructura del Repositorio
 
 ```
-├── Simulacion_Cinematica.pdf # Informecompilado en LaTeX
+├── Simulacion_Cinematica.pdf # Informe compilado en LaTeX
 ├── presentacion-simulacion-cinematica.pptx # Diapositivas
 ├── simulation.py # Motor gráfico (Pygame / 60 FPS)
 ├── main.tex # Código fuente del informe técnico
